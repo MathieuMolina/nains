@@ -52,7 +52,7 @@
 }
 
 btnConnexion:hover{
-    background-color:#000000;
+  background-color:#000000;
 }
 
 #btnInscription{
@@ -75,6 +75,93 @@ btnConnexion:hover{
 btnInscription:hover{
   background-color:#000000;
 }
+
+                                              // HOME MEDIA QUERY
+
+@media screen and ( max-width: 1440px ) {
+  #cadreInscriptionText{
+    position: absolute;
+    top: 35em;
+    left: 50em;
+  }
+}
+
+@media screen and ( max-width: 1024px ) {
+  #cadreInscriptionText{
+    top: 32em;
+    left: 30em;
+  }
+
+}
+
+@media screen and ( max-width: 768px ) {
+  #cadreInscriptionText{
+    top: 26em;
+    left: 3em;
+  }
+
+  #cadreInscriptionTitre{
+    top: 2em;
+    left:20em;
+  }
+
+  #cadreInscriptionTitre h1{
+    font-size: 8em;
+  }
+
+  #btnConnexion {
+    top: 6em;
+    left: 12em;
+    font-size:30px;
+  }
+
+  #btnInscription {
+    top: 10em;
+    left: 12em;
+    font-size:30px;
+  }
+
+  #cadreInscriptionText p{
+    font-size: 3em;
+  }
+
+}
+
+@media screen and ( max-width: 320px ) {
+#cadreInscriptionText{
+  top: 130em;
+  left: 3em;
+}
+
+#cadreInscriptionText p{
+  font-size: 5em;
+}
+
+#cadreInscriptionTitre{
+  top: 8em;
+  left:5em;
+}
+
+#cadreInscriptionTitre h1{
+  font-size:18em;
+}
+
+#btnConnexion {
+  top: 6em;
+  left: 2.3em;
+  font-size:6em;
+}
+
+#btnInscription {
+  top: 10em;
+  left: 2.3em;
+  font-size:6em;
+}
+
+
+
+}
+
 
 
 
