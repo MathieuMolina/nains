@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Centre{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>Bienvenue, {{ app.user.firstname }}, dans "Nains !", le jeu par navigateur.
+        <br><br> ! Le jeu est actuellement en construction ! <br><br> N'hésites pas à faire un tour sur le forum ! </h1>
+
+    <br><br>
+    <button id="btnForum" onclick="window.location.href = '/forum';">Forum</button>
+    <br><br>
+
+    {#    <button><a id="btnDeconnexion" href="{{ path('app_logout') }}">Se déconnecter</a></button>#}
+        <button id="btnForum" onclick="window.location.href = '/logout';">Déconnexion</button>
+
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>Bienvenue, {{ app.user.firstname }}, dans le Forum !</h1>
+
+    <button id="btnForum" onclick="window.location.href = '/centre';">Retour au menu</button>
+    <br><br>
+    <button id="btnForum" onclick="window.location.href = '/logout';">Déconnexion</button>
+</div>
+{% endblock %}
