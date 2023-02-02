@@ -90,7 +90,6 @@ btnInscription:hover{
     top: 32em;
     left: 30em;
   }
-
 }
 
 @media screen and ( max-width: 768px ) {
@@ -184,24 +183,4 @@ btnInscription:hover{
 
                                                   // FORUM
 
-#btnForum{
-  position: absolute;
-  top: 12em;
-  left: 10em;
-
-  background-color:#17788e;
-  border-radius:42px;
-  border:1px solid black;
-  display:inline-block;
-  cursor:pointer;
-  color:#ffffff;
-  font-size:20px;
-  padding:20px 50px;
-  text-decoration:none;
-  text-shadow:0px 1px 0px #2f6627;
-}
-
-btnForum:hover{
-  background-color:#000000;
-}
 
