@@ -26,6 +26,12 @@ class Message
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $message_date = null;
 
+    #[ORM\ManyToOne(inversedBy: 'Id_message')]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'Id_message')]
+    private ?Topic $topic = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +81,30 @@ class Message
     public function setMessageDate(\DateTimeInterface $message_date): self
     {
         $this->message_date = $message_date;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getTopic(): ?Topic
+    {
+        return $this->topic;
+    }
+
+    public function setTopic(?Topic $topic): self
+    {
+        $this->topic = $topic;
 
         return $this;
     }

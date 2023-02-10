@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TopicRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,6 +36,17 @@ class Topic
 
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $content = null;
+
+    #[ORM\ManyToOne(inversedBy: 'Id_topic')]
+    private ?User $user = null;
+
+    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class)]
+    private Collection $Id_message;
+
+    public function __construct()
+    {
+        $this->Id_message = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -126,6 +139,48 @@ class Topic
     public function setContent(?string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getIdMessage(): Collection
+    {
+        return $this->Id_message;
+    }
+
+    public function addIdMessage(Message $idMessage): self
+    {
+        if (!$this->Id_message->contains($idMessage)) {
+            $this->Id_message->add($idMessage);
+            $idMessage->setTopic($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdMessage(Message $idMessage): self
+    {
+        if ($this->Id_message->removeElement($idMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($idMessage->getTopic() === $this) {
+                $idMessage->setTopic(null);
+            }
+        }
 
         return $this;
     }

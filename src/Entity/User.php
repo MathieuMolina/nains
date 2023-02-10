@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -40,6 +42,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Topic::class)]
+    private Collection $Id_topic;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Message::class)]
+    private Collection $Id_message;
+
+    public function __construct()
+    {
+        $this->Id_topic = new ArrayCollection();
+        $this->Id_message = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -174,6 +188,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Topic>
+     */
+    public function getIdTopic(): Collection
+    {
+        return $this->Id_topic;
+    }
+
+    public function addIdTopic(Topic $idTopic): self
+    {
+        if (!$this->Id_topic->contains($idTopic)) {
+            $this->Id_topic->add($idTopic);
+            $idTopic->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdTopic(Topic $idTopic): self
+    {
+        if ($this->Id_topic->removeElement($idTopic)) {
+            // set the owning side to null (unless already changed)
+            if ($idTopic->getUser() === $this) {
+                $idTopic->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getIdMessage(): Collection
+    {
+        return $this->Id_message;
+    }
+
+    public function addIdMessage(Message $idMessage): self
+    {
+        if (!$this->Id_message->contains($idMessage)) {
+            $this->Id_message->add($idMessage);
+            $idMessage->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdMessage(Message $idMessage): self
+    {
+        if ($this->Id_message->removeElement($idMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($idMessage->getUser() === $this) {
+                $idMessage->setUser(null);
+            }
+        }
 
         return $this;
     }
