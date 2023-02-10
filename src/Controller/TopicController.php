@@ -18,17 +18,43 @@ class TopicController extends AbstractController
     {
         return $this->render('topic/index.html.twig', [
             'topics' => $topicRepository->findAll(),
-        ]);
+            'views' => $topicRepository-> findAll(),
+            ]);
     }
 
     #[Route('/new', name: 'app_topic_new', methods: ['GET', 'POST'])]
+
+//    Paragraphe qui suit pour capturer automatiquement la date actuelle lors de la création du topic
+
+//    public function createAction(Request $request)
+//    {
+//        // Le formulaire symfony se chargera d'hydrater ton input date avec la valeur du champ date de l'entité article
+//        $form = $this->createFormBuilder(new Topic()); //nul besoin de set la date grâce au constructeur
+//        // ...
+//    }
+
+
     public function new(Request $request, TopicRepository $topicRepository): Response
     {
+
+
+//        Set ici ce que je ne propose pas dans le formulaire
+
         $topic = new Topic();
+//        $topic->setTopicCreator(get_current_user());
+
+        $date = new \DateTime();
+
         $form = $this->createForm(TopicType::class, $topic);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //Permet de set la date automatiquement =>
+            $topic->setTopicDate($date);
+
+
+
             $topicRepository->save($topic, true);
 
             return $this->redirectToRoute('app_topic_index', [], Response::HTTP_SEE_OTHER);
@@ -38,6 +64,8 @@ class TopicController extends AbstractController
             'topic' => $topic,
             'form' => $form,
         ]);
+
+
     }
 
     #[Route('/{id}', name: 'app_topic_show', methods: ['GET'])]

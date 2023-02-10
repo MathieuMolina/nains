@@ -17,20 +17,23 @@ class Topic
     #[ORM\Column(length: 255)]
     private ?string $topic_title = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $topic_creator = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $topic_last_user = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $topic_date = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $topic_reply_date = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $topic_views = null;
+
+    #[ORM\Column(length: 500, nullable: true)]
+    private ?string $content = null;
 
     public function getId(): ?int
     {
@@ -85,6 +88,12 @@ class Topic
         return $this;
     }
 
+    //Prochain paragraphe pour permettre de générer automatiquement la date lors du post du topic
+//    public function __construct()
+//    {
+//        $this->date = new \DateTime('now');
+//    }
+
     public function getTopicReplyDate(): ?\DateTimeInterface
     {
         return $this->topic_reply_date;
@@ -105,6 +114,18 @@ class Topic
     public function setTopicViews(int $topic_views): self
     {
         $this->topic_views = $topic_views;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): self
+    {
+        $this->content = $content;
 
         return $this;
     }

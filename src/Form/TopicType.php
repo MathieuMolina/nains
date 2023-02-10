@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Topic;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,11 +14,12 @@ class TopicType extends AbstractType
     {
         $builder
             ->add('topic_title')
-            ->add('topic_creator')
-            ->add('topic_last_user')
-            ->add('topic_date')
-            ->add('topic_reply_date')
-            ->add('topic_views')
+            ->add('content')
+            ->add('topic_creator',HiddenType::class)
+//            ->add('topic_last_user')
+//            ->add('topic_date')
+//            ->add('topic_reply_date')
+//            ->add('topic_views')
         ;
     }
 
