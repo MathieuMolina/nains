@@ -5,15 +5,13 @@
 {% block body %}
 
 <div class="example-wrapper">
-    <h1>Bienvenue, {{ app.user.firstname }}, dans "Nains !", le jeu par navigateur.
+    <h1>Bienvenue, {{ app.user.email }}, dans "Nains !", le jeu par navigateur.
         <br><br> ! Le jeu est actuellement en construction ! <br><br> N'hésites pas à faire un tour sur le forum ! </h1>
 
-{#    <br><br>#}
-{#    <button class="btn btn-lg btn-primary" onclick="window.location.href = '/forum';">Forum</button>#}
+
 {#    <br><br>#}
     <a href="{{ path('app_forum') }}">Forum</a>
     <br><br>
-{#        <button class="btn btn-lg btn-primary" onclick="window.location.href = '/logout';">Déconnexion</button>#}
     <a href="{{ path('app_logout') }}">Déconnexion</a>
 </div>
 {% endblock %}

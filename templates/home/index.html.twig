@@ -10,9 +10,9 @@
             <h1>Nains !</h1>
         </div>
 
-        <button id="btnConnexion" onclick="window.location.href = '/login';">Connexion</button>
+        <a id="btnConnexion" href="{{ path('app_login') }}">Connexion</a>
 
-        <button id="btnInscription" onclick="window.location.href = '/register';">Inscription</button>
+        <a id="btnInscription" href="{{ path('app_register') }}">Inscription</a>
 
 
         <div id="cadreInscriptionText">

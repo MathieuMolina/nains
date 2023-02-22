@@ -6,9 +6,10 @@
     <section class="container">
 
         <div class="example-wrapper">
-            <h1>Bienvenue {{ app.user.firstname }}, dans le Forum !</h1>
+            <h1>Bienvenue {{ app.user.email }}, dans le Forum !</h1>
 
             <a href="{{ path('app_topic_new') }}">Créer un nouveau sujet</a>
+
             <br><br>
 
 
@@ -17,31 +18,31 @@
                     <tr>
                         <th>Titre</th>
                         <th>Auteur</th>
-                        <th>Dernier message</th>
+                        <th>Date Dernier message</th>
                         <th>Date de création</th>
                         <th>Date dernière réponse</th>
                         <th>Nombre de vue</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for topic in topics %}
-                        <tr>
-                            <td>{{ topic.topicTitle }}</td>
-                            <td>{{ topic.topicCreator }}</td>
-                            <td>{{ topic.topicLastUser }}</td>
-                            <td>{{ topic.topicDate ? topic.topicDate|date('d-M-Y') : '' }}</td>
-                            <td>{{ topic.topicReplyDate ? topic.topicReplyDate|date('d-M-Y') : '' }}</td>
-                            <td>{{ topic.topicViews }}</td>
-                            <td>
-                                <a href="{{ path('app_topic_show', {'id': topic.id}) }}">show</a>
-                                <a href="{{ path('app_topic_edit', {'id': topic.id}) }}">edit</a>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="8">no records found</td>
-                        </tr>
-                    {% endfor %}
+{#                    {% for topic in topics %}#}
+{#                        <tr>#}
+{#                            <td>{{ topic.topicTitle }}</td>#}
+{#                            <td>{{ topic.topicCreator }}</td>#}
+{#                            <td>{{ topic.topicLastUser }}</td>#}
+{#                            <td>{{ topic.topicDate ? topic.topicDate|date('d-M-Y') : '' }}</td>#}
+{#                            <td>{{ topic.topicReplyDate ? topic.topicReplyDate|date('d-M-Y') : '' }}</td>#}
+{#                            <td>{{ topic.topicViews }}</td>#}
+{#                            <td>#}
+{#                                <a href="{{ path('app_topic_show', {'id': topic.id}) }}">show</a>#}
+{#                                <a href="{{ path('app_topic_edit', {'id': topic.id}) }}">edit</a>#}
+{#                            </td>#}
+{#                        </tr>#}
+{#                    {% else %}#}
+{#                        <tr>#}
+{#                            <td colspan="8">no records found</td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
                     </tbody>
                 </table>
 
