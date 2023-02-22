@@ -14,22 +14,18 @@ class Message
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $content = null;
+
     #[ORM\Column]
-    private ?int $topic_id = null;
+    private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $message_creator = null;
+    #[ORM\ManyToOne(inversedBy: 'messages')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $creator = null;
 
-    #[ORM\Column(length: 500)]
-    private ?string $message_content = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $message_date = null;
-
-    #[ORM\ManyToOne(inversedBy: 'Id_message')]
-    private ?User $user = null;
-
-    #[ORM\ManyToOne(inversedBy: 'Id_message')]
+    #[ORM\ManyToOne(inversedBy: 'messages')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Topic $topic = null;
 
     public function getId(): ?int
@@ -37,62 +33,38 @@ class Message
         return $this->id;
     }
 
-    public function getTopicId(): ?int
+    public function getContent(): ?string
     {
-        return $this->topic_id;
+        return $this->content;
     }
 
-    public function setTopicId(int $topic_id): self
+    public function setContent(string $content): self
     {
-        $this->topic_id = $topic_id;
+        $this->content = $content;
 
         return $this;
     }
 
-    public function getMessageCreator(): ?string
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->message_creator;
+        return $this->createdAt;
     }
 
-    public function setMessageCreator(string $message_creator): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
-        $this->message_creator = $message_creator;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getMessageContent(): ?string
+    public function getCreator(): ?User
     {
-        return $this->message_content;
+        return $this->creator;
     }
 
-    public function setMessageContent(string $message_content): self
+    public function setCreator(?User $creator): self
     {
-        $this->message_content = $message_content;
-
-        return $this;
-    }
-
-    public function getMessageDate(): ?\DateTimeInterface
-    {
-        return $this->message_date;
-    }
-
-    public function setMessageDate(\DateTimeInterface $message_date): self
-    {
-        $this->message_date = $message_date;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
+        $this->creator = $creator;
 
         return $this;
     }

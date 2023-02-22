@@ -17,35 +17,27 @@ class Topic
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $topic_title = null;
+    private ?string $title = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $topic_creator = null;
+    #[ORM\ManyToOne(inversedBy: 'topics')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $creator = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $topic_last_user = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $topic_date = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $topic_reply_date = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $topic_views = null;
-
-    #[ORM\Column(length: 500, nullable: true)]
-    private ?string $content = null;
-
-    #[ORM\ManyToOne(inversedBy: 'Id_topic')]
-    private ?User $user = null;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class)]
-    private Collection $Id_message;
+    private Collection $messages;
+
+    #[ORM\Column]
+    private ?int $views = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $content = null;
 
     public function __construct()
     {
-        $this->Id_message = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -53,80 +45,80 @@ class Topic
         return $this->id;
     }
 
-    public function getTopicTitle(): ?string
+    public function getTitle(): ?string
     {
-        return $this->topic_title;
+        return $this->title;
     }
 
-    public function setTopicTitle(string $topic_title): self
+    public function setTitle(string $title): self
     {
-        $this->topic_title = $topic_title;
+        $this->title = $title;
 
         return $this;
     }
 
-    public function getTopicCreator(): ?string
+    public function getCreator(): ?User
     {
-        return $this->topic_creator;
+        return $this->creator;
     }
 
-    public function setTopicCreator(string $topic_creator): self
+    public function setCreator(?User $creator): self
     {
-        $this->topic_creator = $topic_creator;
+        $this->creator = $creator;
 
         return $this;
     }
 
-    public function getTopicLastUser(): ?string
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->topic_last_user;
+        return $this->createdAt;
     }
 
-    public function setTopicLastUser(string $topic_last_user): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
-        $this->topic_last_user = $topic_last_user;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getTopicDate(): ?\DateTimeInterface
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessages(): Collection
     {
-        return $this->topic_date;
+        return $this->messages;
     }
 
-    public function setTopicDate(\DateTimeInterface $topic_date): self
+    public function addMessage(Message $message): self
     {
-        $this->topic_date = $topic_date;
+        if (!$this->messages->contains($message)) {
+            $this->messages->add($message);
+            $message->setTopic($this);
+        }
 
         return $this;
     }
 
-    //Prochain paragraphe pour permettre de générer automatiquement la date lors du post du topic
-//    public function __construct()
-//    {
-//        $this->date = new \DateTime('now');
-//    }
-
-    public function getTopicReplyDate(): ?\DateTimeInterface
+    public function removeMessage(Message $message): self
     {
-        return $this->topic_reply_date;
-    }
-
-    public function setTopicReplyDate(\DateTimeInterface $topic_reply_date): self
-    {
-        $this->topic_reply_date = $topic_reply_date;
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getTopic() === $this) {
+                $message->setTopic(null);
+            }
+        }
 
         return $this;
     }
 
-    public function getTopicViews(): ?int
+    public function getViews(): ?int
     {
-        return $this->topic_views;
+        return $this->views;
     }
 
-    public function setTopicViews(int $topic_views): self
+    public function setViews(int $views): self
     {
-        $this->topic_views = $topic_views;
+        $this->views = $views;
 
         return $this;
     }
@@ -139,48 +131,6 @@ class Topic
     public function setContent(?string $content): self
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Message>
-     */
-    public function getIdMessage(): Collection
-    {
-        return $this->Id_message;
-    }
-
-    public function addIdMessage(Message $idMessage): self
-    {
-        if (!$this->Id_message->contains($idMessage)) {
-            $this->Id_message->add($idMessage);
-            $idMessage->setTopic($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdMessage(Message $idMessage): self
-    {
-        if ($this->Id_message->removeElement($idMessage)) {
-            // set the owning side to null (unless already changed)
-            if ($idMessage->getTopic() === $this) {
-                $idMessage->setTopic(null);
-            }
-        }
 
         return $this;
     }

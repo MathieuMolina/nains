@@ -6,12 +6,10 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -31,28 +29,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $lastname = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $abo = null;
+    #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Topic::class)]
+    private Collection $topics;
 
-    #[ORM\Column(type: 'boolean')]
-    private $isVerified = false;
-
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Topic::class)]
-    private Collection $Id_topic;
-
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Message::class)]
-    private Collection $Id_message;
+    #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Message::class)]
+    private Collection $messages;
 
     public function __construct()
     {
-        $this->Id_topic = new ArrayCollection();
-        $this->Id_message = new ArrayCollection();
+        $this->topics = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -141,7 +133,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        $this->plainPassword = null;
+        // $this->plainPassword = null;
     }
 
     public function getFirstname(): ?string
@@ -149,7 +141,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -161,33 +153,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): self
+    public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    public function isAbo(): ?bool
-    {
-        return $this->abo;
-    }
-
-    public function setAbo(?bool $abo): self
-    {
-        $this->abo = $abo;
-
-        return $this;
-    }
-
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
-    public function setIsVerified(bool $isVerified): self
-    {
-        $this->isVerified = $isVerified;
 
         return $this;
     }
@@ -195,27 +163,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Topic>
      */
-    public function getIdTopic(): Collection
+    public function getTopics(): Collection
     {
-        return $this->Id_topic;
+        return $this->topics;
     }
 
-    public function addIdTopic(Topic $idTopic): self
+    public function addTopic(Topic $topic): self
     {
-        if (!$this->Id_topic->contains($idTopic)) {
-            $this->Id_topic->add($idTopic);
-            $idTopic->setUser($this);
+        if (!$this->topics->contains($topic)) {
+            $this->topics->add($topic);
+            $topic->setCreator($this);
         }
 
         return $this;
     }
 
-    public function removeIdTopic(Topic $idTopic): self
+    public function removeTopic(Topic $topic): self
     {
-        if ($this->Id_topic->removeElement($idTopic)) {
+        if ($this->topics->removeElement($topic)) {
             // set the owning side to null (unless already changed)
-            if ($idTopic->getUser() === $this) {
-                $idTopic->setUser(null);
+            if ($topic->getCreator() === $this) {
+                $topic->setCreator(null);
             }
         }
 
@@ -225,27 +193,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Message>
      */
-    public function getIdMessage(): Collection
+    public function getMessages(): Collection
     {
-        return $this->Id_message;
+        return $this->messages;
     }
 
-    public function addIdMessage(Message $idMessage): self
+    public function addMessage(Message $message): self
     {
-        if (!$this->Id_message->contains($idMessage)) {
-            $this->Id_message->add($idMessage);
-            $idMessage->setUser($this);
+        if (!$this->messages->contains($message)) {
+            $this->messages->add($message);
+            $message->setCreator($this);
         }
 
         return $this;
     }
 
-    public function removeIdMessage(Message $idMessage): self
+    public function removeMessage(Message $message): self
     {
-        if ($this->Id_message->removeElement($idMessage)) {
+        if ($this->messages->removeElement($message)) {
             // set the owning side to null (unless already changed)
-            if ($idMessage->getUser() === $this) {
-                $idMessage->setUser(null);
+            if ($message->getCreator() === $this) {
+                $message->setCreator(null);
             }
         }
 
