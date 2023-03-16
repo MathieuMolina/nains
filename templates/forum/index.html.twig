@@ -1,50 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Forum{% endblock %}
+{% block title %}{{ 'welcome'|trans }} Forum!{% endblock %}
 
 {% block body %}
-    <section class="container">
-
-        <div class="example-wrapper">
-            <h1>Bienvenue {{ app.user.email }}, dans le Forum !</h1>
-
-{#            <a href="{{ path('app_topic_new') }}">Créer un nouveau sujet</a>#}
-
-            <br><br>
-
-
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Titre</th>
-                        <th>Auteur</th>
-                        <th>Date Dernier message</th>
-                        <th>Date de création</th>
-                        <th>Date dernière réponse</th>
-                        <th>Nombre de vue</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-{#                    {% for topic in topics %}#}
-{#                        <tr>#}
-{#                            <td>{{ topic.topicTitle }}</td>#}
-{#                            <td>{{ topic.topicCreator }}</td>#}
-{#                            <td>{{ topic.topicLastUser }}</td>#}
-{#                            <td>{{ topic.topicDate ? topic.topicDate|date('d-M-Y') : '' }}</td>#}
-{#                            <td>{{ topic.topicReplyDate ? topic.topicReplyDate|date('d-M-Y') : '' }}</td>#}
-{#                            <td>{{ topic.topicViews }}</td>#}
-{#                            <td>#}
-{#                                <a href="{{ path('app_topic_show', {'id': topic.id}) }}">show</a>#}
-{#                                <a href="{{ path('app_topic_edit', {'id': topic.id}) }}">edit</a>#}
-{#                            </td>#}
-{#                        </tr>#}
-{#                    {% else %}#}
-{#                        <tr>#}
-{#                            <td colspan="8">no records found</td>#}
-{#                        </tr>#}
-{#                    {% endfor %}#}
-                    </tbody>
-                </table>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 my-5">
+                {% if app.user %}
+                    <div class="bg-info p-3">
+                        <p>{{ 'welcome'|trans }} {{ app.user.email }}</p>
+                    </div>
+                {% endif %}
+            </div>
+            <h1> {{ 'topic.list'|trans }} </h1>
+            {% include 'forum/recursive_topic.html.twig' %}
+        </div>
+    </div>
 
             <br><br>
             <a href="{{ path('app_centre') }}">Menu</a>

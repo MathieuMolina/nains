@@ -1,13 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Topic{% endblock %}
+{% block title %}Nouveau topic{% endblock %}
 
 {% block body %}
-    <section class="container">
-        <h1>Création de nouveau sujet</h1>
+    <h1>Créer un nouveau topic</h1>
 
-        {{ include('topic/_form.html.twig') }}
+    {{ include('topic/_form.html.twig') }}
 
-        <a href="{{ path('app_forum') }}">Retour au forum</a>
-    </section>
+    <a href="{{ path('app_topic_index') }}">Retour à la liste</a>
 {% endblock %}

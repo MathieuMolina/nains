@@ -1,0 +1,21 @@
+{% from _self import recursiveParentTopic %}
+Topics :
+
+{% if topic.topic is not null %}
+    {{ recursiveParentTopic(topic.topic) }}
+{% endif %}
+
+<a href="{{ path('app_front_topic_show', {topic : topic.id}) }}"
+   class="text-dark text-decoration-underline">{{ topic.title }}</a>
+
+{% macro recursiveParentTopic(topic) %}
+    {% import _self as self %}
+
+    {% if topic.topic is not null %}
+        {{ self.recursiveParentTopic(topic.topic) }}
+    {% endif %}
+
+    <a href="{{ path('app_front_topic_show', {topic : topic.id}) }}"
+       class="fw-bolder text-dark text-decoration-none">{{ topic.title }} ></a>
+
+{% endmacro %}
