@@ -35,9 +35,12 @@ class Topic
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
+    private Collection $topics;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
+        $this->topics = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -134,4 +137,54 @@ class Topic
 
         return $this;
     }
+
+
+
+
+//    Rajouts, provoque erreurs:
+
+
+
+    public function getTopic(): ?self
+    {
+        return $this->topic;
+    }
+
+    public function setTopic(?self $topic): self
+    {
+        $this->topic = $topic;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getTopics(): Collection
+    {
+        return $this->topics;
+    }
+
+    public function addTopic(self $topic): self
+    {
+        if (!$this->topic->contains($topic)) {
+            $this->topics->add($topic);
+            $topic->setTopic($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTopic(self $topic): self
+    {
+        if ($this->topic->removeElement($topic)) {
+            // set the owning side to null (unless already changed)
+            if ($topic->getTopic() === $this) {
+                $topic->setTopic(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
