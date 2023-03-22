@@ -19,15 +19,15 @@ class Topic
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\ManyToOne(inversedBy: 'topics')]
+//    #[ORM\ManyToOne(inversedBy: 'topics')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $creator = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class)]
-    private Collection $messages;
+//    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class)]
+//    private Collection $messages;
 
     #[ORM\Column]
     private ?int $views = null;
@@ -145,14 +145,14 @@ class Topic
 
 
 
-    public function getTopic(): ?self
+    public function getTopic(): ?Collection
     {
-        return $this->topic;
+        return $this->topics;
     }
 
-    public function setTopic(?self $topic): self
+    public function setTopic(?Collection $topic): Topic
     {
-        $this->topic = $topic;
+        $this->topics = $topic;
 
         return $this;
     }

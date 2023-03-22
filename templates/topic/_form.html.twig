@@ -1,14 +1,4 @@
 {{ form_start(form) }}
 {#    {{ form_widget(form) }}#}
-    {{ form_row(form.topic_title, {
-        label : 'Titre du topic',
-    }) }}
-    {{ form_row(form.content, {
-        label: 'Message:',
-    }) }}
-    {{ form_row(form.topic_creator, {
-        'attr' : {'value': app.user.firstname}
-    }) }}
 
-    <button class="btn">{{ button_label|default('Poster') }}</button>
 {{ form_end(form) }}
