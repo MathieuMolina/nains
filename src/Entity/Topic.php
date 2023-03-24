@@ -33,8 +33,8 @@ class Topic
      * @ORM\Column(type="datetime")
      */
 
-//    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class)]
-//    private Collection $messages;
+    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class)]
+    private Collection $messages;
 
 
 
@@ -56,7 +56,7 @@ class Topic
 
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $content = null;
+    public ?string $message = null;
 
     private Collection $topics;
 
@@ -174,17 +174,18 @@ class Topic
         return $this;
     }
 
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(?string $content): self
-    {
-        $this->content = $content;
-
-        return $this;
-    }
+//                                             !! Content probablement remplacé par message !!
+//    public function getContent(): ?string
+//    {
+//        return $this->content;
+//    }
+//
+//    public function setContent(?string $content): self
+//    {
+//        $this->content = $content;
+//
+//        return $this;
+//    }
 
 
     public function getTopic(): ?Collection

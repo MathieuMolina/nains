@@ -31,7 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: false)]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -43,8 +43,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Topic::class)]
     private Collection $topics;
 
-//    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Message::class)]
-//    private Collection $messages;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Message::class)]
+    private Collection $messages;
 
 //    #[ORM\Column(type: 'boolean')]
 //    private $isVerified = false;
@@ -201,30 +201,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Message>
      */
-//    public function getMessages(): Collection
-//    {
-//        return $this->messages;
-//    }
-//
-//    public function addMessage(Message $message): self
-//    {
-//        if (!$this->messages->contains($message)) {
-//            $this->messages->add($message);
-//            $message->setCreator($this);
-//        }
-//
-//        return $this;
-//    }
-//
-//    public function removeMessage(Message $message): self
-//    {
-//        if ($this->messages->removeElement($message)) {
-//            // set the owning side to null (unless already changed)
-//            if ($message->getCreator() === $this) {
-//                $message->setCreator(null);
-//            }
-//        }
-//
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages->add($message);
+            $message->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getCreator() === $this) {
+                $message->setCreator(null);
+            }
+        }
+      }
 //        return $this;
 //    }
 
@@ -239,4 +239,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 //
 //        return $this;
 //    }
+
 }
