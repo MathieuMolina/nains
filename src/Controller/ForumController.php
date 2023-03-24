@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\TopicRepository;
 use App\Entity\Topic;
+use App\Entity\User;
 use App\Form\TopicType;
 
 
@@ -35,11 +36,13 @@ class ForumController extends AbstractController
         $topic = new Topic();
         $form = $this->createForm(TopicType::class, $topic);
         $form->handleRequest($request);
+        $user = $this->getUser();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $topicRepository->save($topic, true);
+            $topicRepository->save($topic, $user, true);
 
-            return $this->redirectToRoute('app_topic_index', [], Response::HTTP_SEE_OTHER);
+
+            return $this->redirectToRoute('app_forum', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('topic/new.html.twig', [

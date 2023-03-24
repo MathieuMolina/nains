@@ -9,6 +9,10 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TopicRepository::class)]
+/**
+ * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
+ */
 class Topic
 {
     #[ORM\Id]
@@ -19,18 +23,37 @@ class Topic
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-//    #[ORM\ManyToOne(inversedBy: 'topics')]
+    #[ORM\ManyToOne(inversedBy: 'topics')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $creator = null;
+    private ?User $user = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?\DateTimeImmutable $createdAt;
+    /**
+     * @ORM\Column(type="datetime")
+     */
 
 //    #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class)]
 //    private Collection $messages;
 
+
+
     #[ORM\Column]
-    private ?int $views = null;
+    /**
+     * @ORM\Column(type="integer", options={"default": 0})
+     */
+    private int $views = 0;
+
+
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function updateViews(): void
+    {
+        $this->views += 1;
+    }
+
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
@@ -41,7 +64,22 @@ class Topic
     {
         $this->messages = new ArrayCollection();
         $this->topics = new ArrayCollection();
+
+        $this->createdAt = new \DateTimeImmutable();
     }
+
+//    /**
+//     * @ORM\PrePersist
+//     */
+//    public function setCreatedAtValue()
+//    {
+//        $this->createdAt = new \DateTimeImmutable();
+//    }
+
+
+
+
+
 
     public function getId(): ?int
     {
@@ -60,14 +98,26 @@ class Topic
         return $this;
     }
 
-    public function getCreator(): ?User
+//    public function getCreator(): ?User
+//    {
+//        return $this->creator;
+//    }
+//
+//    public function setCreator(?User $creator): self
+//    {
+//        $this->creator = $creator;
+//
+//        return $this;
+//    }
+
+    public function getUser(): ?User
     {
-        return $this->creator;
+        return $this->user;
     }
 
-    public function setCreator(?User $creator): self
+    public function setUser(?User $user): self
     {
-        $this->creator = $creator;
+        $this-> user = $user;
 
         return $this;
     }
@@ -77,11 +127,9 @@ class Topic
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(\DateTimeImmutable $createdAt): void
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -137,12 +185,6 @@ class Topic
 
         return $this;
     }
-
-
-
-
-//    Rajouts, provoque erreurs:
-
 
 
     public function getTopic(): ?Collection

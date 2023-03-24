@@ -37,19 +37,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $lastname = null;
 
-    #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Topic::class)]
+//    #[ORM\Column(length: 255, nullable: true)]
+//    private ?string $username = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Topic::class)]
     private Collection $topics;
 
-    #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Message::class)]
-    private Collection $messages;
+//    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Message::class)]
+//    private Collection $messages;
 
-    #[ORM\Column(type: 'boolean')]
-    private $isVerified = false;
+//    #[ORM\Column(type: 'boolean')]
+//    private $isVerified = false;
 
     public function __construct()
     {
         $this->topics = new ArrayCollection();
-        $this->messages = new ArrayCollection();
+//        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -177,63 +180,63 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->topics->contains($topic)) {
             $this->topics->add($topic);
-            $topic->setCreator($this);
+            $topic->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeTopic(Topic $topic): self
-    {
-        if ($this->topics->removeElement($topic)) {
-            // set the owning side to null (unless already changed)
-            if ($topic->getCreator() === $this) {
-                $topic->setCreator(null);
-            }
-        }
+//    public function removeTopic(Topic $topic): self
+//    {
+//        if ($this->topics->removeElement($topic)) {
+//            // set the owning side to null (unless already changed)
+//            if ($topic->getUser() === $this) {
+//                $topic->getUser(null);
+//            }
+//        }
 
-        return $this;
-    }
+//        return $this;
+//    }
 
     /**
      * @return Collection<int, Message>
      */
-    public function getMessages(): Collection
-    {
-        return $this->messages;
-    }
+//    public function getMessages(): Collection
+//    {
+//        return $this->messages;
+//    }
+//
+//    public function addMessage(Message $message): self
+//    {
+//        if (!$this->messages->contains($message)) {
+//            $this->messages->add($message);
+//            $message->setCreator($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeMessage(Message $message): self
+//    {
+//        if ($this->messages->removeElement($message)) {
+//            // set the owning side to null (unless already changed)
+//            if ($message->getCreator() === $this) {
+//                $message->setCreator(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 
-    public function addMessage(Message $message): self
-    {
-        if (!$this->messages->contains($message)) {
-            $this->messages->add($message);
-            $message->setCreator($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMessage(Message $message): self
-    {
-        if ($this->messages->removeElement($message)) {
-            // set the owning side to null (unless already changed)
-            if ($message->getCreator() === $this) {
-                $message->setCreator(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
-    public function setIsVerified(bool $isVerified): self
-    {
-        $this->isVerified = $isVerified;
-
-        return $this;
-    }
+//    public function isVerified(): bool
+//    {
+//        return $this->isVerified;
+//    }
+//
+//    public function setIsVerified(bool $isVerified): self
+//    {
+//        $this->isVerified = $isVerified;
+//
+//        return $this;
+//    }
 }

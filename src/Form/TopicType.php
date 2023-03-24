@@ -16,9 +16,11 @@ class TopicType extends AbstractType
         $builder
             ->add('title', TextType::class)
 
+//            ->add('message', TextType::class)
 
 
-            ->add('Ajouter', SubmitType::class)
+
+            ->add('Ajouter', submitType::class)
         ;
     }
 

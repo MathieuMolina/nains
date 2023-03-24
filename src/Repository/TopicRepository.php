@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Topic;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,6 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Topic[]    findAll()
  * @method Topic[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
+
 class TopicRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -21,12 +23,16 @@ class TopicRepository extends ServiceEntityRepository
         parent::__construct($registry, Topic::class);
     }
 
-    public function save(Topic $entity, bool $flush = false): void
+    public function save(Topic $entity, User $user, bool $flush = false): void
     {
+        $entity->setUser($user);
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
             $this->getEntityManager()->flush();
+
+
         }
     }
 
