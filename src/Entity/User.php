@@ -31,14 +31,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255, nullable: false)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $lastname = null;
 
-//    #[ORM\Column(length: 255, nullable: true)]
-//    private ?string $username = null;
+    #[ORM\Column(length: 255)]
+    private ?string $username;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Topic::class)]
     private Collection $topics;
@@ -87,7 +87,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
+    }
+
+    public function setUsername(string $username)
+    {
+        $this->username = $username;
+
+        return $this;
+
     }
 
     /**

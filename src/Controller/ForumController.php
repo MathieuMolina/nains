@@ -24,9 +24,6 @@ class ForumController extends AbstractController
         ]);
     }
 
-//    Rajouts :
-
-
 
 
 
