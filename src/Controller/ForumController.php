@@ -25,8 +25,6 @@ class ForumController extends AbstractController
     }
 
 
-
-
     #[Route('/new', name: 'app_topic_new', methods: ['GET', 'POST'])]
     public function new(Request $request, TopicRepository $topicRepository): Response
     {
@@ -47,4 +45,18 @@ class ForumController extends AbstractController
             'form' => $form,
         ]);
     }
+
+//    /**
+//     * @Route("/forum/topic/{id}", name="forum_topic")
+//     */
+//    public function afficherTopic($id)
+//    {
+//        // Récupérer le sujet avec l'ID donné
+//        $topic = // ...
+//
+//    // Afficher le sujet
+//    return $this->render('forum/topic.html.twig', [
+//        'topic' => $topic,
+//    ]);
+//}
 }

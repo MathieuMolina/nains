@@ -22,7 +22,7 @@ class Message
 
     #[ORM\ManyToOne(inversedBy: 'messages')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $creator = null;
+    private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'messages')]
     #[ORM\JoinColumn(nullable: false)]
@@ -57,14 +57,14 @@ class Message
         return $this;
     }
 
-    public function getCreator(): ?User
+    public function getUser(): ?User
     {
-        return $this->creator;
+        return $this->user;
     }
 
-    public function setCreator(?User $creator): self
+    public function setUser(?User $user): self
     {
-        $this->creator = $creator;
+        $this->user = $user;
 
         return $this;
     }
