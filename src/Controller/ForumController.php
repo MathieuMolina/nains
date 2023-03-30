@@ -46,17 +46,35 @@ class ForumController extends AbstractController
         ]);
     }
 
-//    /**
-//     * @Route("/forum/topic/{id}", name="forum_topic")
-//     */
-//    public function afficherTopic($id)
+//    #[Route('/topic/{id}', name: 'topic/show.html.twig')]
+//    public function show(string $id): Response
 //    {
-//        // Récupérer le sujet avec l'ID donné
-//        $topic = // ...
+//        // Récupération du topic avec l'identifiant $id
+//        $topic = $this->entityManager->getManager()->getRepository(Topic::class)->find($id);
 //
-//    // Afficher le sujet
-//    return $this->render('forum/topic.html.twig', [
-//        'topic' => $topic,
-//    ]);
-//}
+//        // Vérification si le topic existe
+//        if (!$topic) {
+//            throw $this->createNotFoundException('Le topic n\'existe pas.');
+//        }
+//
+//        // Création de la réponse
+//        $response = new Response();
+//
+//        // Retour de la réponse
+//        return $response;
+//    }
+
+    #[Route('/topic/{id}', name: 'app_topic_show')]
+    public function show(Topic $topic): Response
+    {
+
+//         Vérification si le topic existe
+        if (!$topic) {
+            throw $this->createNotFoundException('Le topic n\'existe pas.');
+        }
+
+        return $this->render('topic/show.html.twig', [
+            'topic' => $topic,
+        ]);
+    }
 }

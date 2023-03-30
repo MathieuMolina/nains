@@ -68,19 +68,6 @@ class Topic
         $this->createdAt = new \DateTimeImmutable();
     }
 
-//    /**
-//     * @ORM\PrePersist
-//     */
-//    public function setCreatedAtValue()
-//    {
-//        $this->createdAt = new \DateTimeImmutable();
-//    }
-
-
-
-
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -97,18 +84,6 @@ class Topic
 
         return $this;
     }
-
-//    public function getCreator(): ?User
-//    {
-//        return $this->creator;
-//    }
-//
-//    public function setCreator(?User $creator): self
-//    {
-//        $this->creator = $creator;
-//
-//        return $this;
-//    }
 
     public function getUser(): ?User
     {

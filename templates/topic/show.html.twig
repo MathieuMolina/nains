@@ -13,34 +13,34 @@
             </tr>
             <tr>
                 <th>Topic_title</th>
-                <td>{{ topic.topicTitle }}</td>
+                <td>{{ topic.Title }}</td>
             </tr>
-            <tr>
-                <th>Topic_creator</th>
-                <td>{{ topic.topicCreator }}</td>
-            </tr>
-            <tr>
-                <th>Topic_last_user</th>
-                <td>{{ topic.topicLastUser }}</td>
-            </tr>
-            <tr>
-                <th>Topic_date</th>
-                <td>{{ topic.topicDate ? topic.topicDate|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Topic_reply_date</th>
-                <td>{{ topic.topicReplyDate ? topic.topicReplyDate|date('Y-m-d') : '' }}</td>
-            </tr>
+{#            <tr>#}
+{#                <th>Topic_creator</th>#}
+{#                <td>{{ topic.Creator }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Topic_last_user</th>#}
+{#                <td>{{ topic.LastUser }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Topic_date</th>#}
+{#                <td>{{ topic.Date ? topic.Date|date('Y-m-d') : '' }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Topic_reply_date</th>#}
+{#                <td>{{ topic.ReplyDate ? topic.ReplyDate|date('Y-m-d') : '' }}</td>#}
+{#            </tr>#}
             <tr>
                 <th>Topic_views</th>
-                <td>{{ topic.topicViews }}</td>
+                <td>{{ topic.Views }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_topic_index') }}">Retour</a>
+    <a href="{{ path('app_forum') }}">Retour</a>
 
-    <a href="{{ path('app_topic_edit', {'id': topic.id}) }}">Editer</a>
+{#    <a href="{{ path('app_topic_edit', {'id': topic.id}) }}">Editer</a>#}
 
-    {{ include('topic/_delete_form.html.twig') }}
+{#    {{ include('topic/_delete_form.html.twig') }}#}
 {% endblock %}

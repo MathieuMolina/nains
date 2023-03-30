@@ -25,7 +25,9 @@
                     <tbody>
                     {% for topic in topics %}
                         <tr>
-                            <td>{{ topic.Title }}</td>
+{#                            <td>{{ topic.Title }}</td>#}
+
+                            <td> <a href="{{ path('app_topic_show', {id: topic.id}) }}">{{ topic.Title }}</a></td>
 
                             <td>{{ topic.User.username}}</td>
 {#                            <td>{{ topic.LastUser }}</td>#}
