@@ -8,13 +8,13 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Titre:</th>
+                <th>Titre du topic:</th>
                 <td>{{ topic.Title }}</td>
             </tr>
-{#            <tr>#}
-{#                <th>Topic_creator</th>#}
-{#                <td>{{ topic.User }}</td>#}
-{#            </tr>#}
+            <tr>
+                <th>Créateur:</th>
+                <td>{{ topic.User.username }}</td>
+            </tr>
 {#            <tr>#}
 {#                <th>Topic_last_user</th>#}
 {#                <td>{{ topic.LastUser }}</td>#}
@@ -27,10 +27,10 @@
 {#                <th>Topic_reply_date</th>#}
 {#                <td>{{ topic.ReplyDate ? topic.ReplyDate|date('Y-m-d') : '' }}</td>#}
 {#            </tr>#}
-            <tr>
-                <th>Nombre de vues:</th>
-                <td>{{ topic.Views }}</td>
-            </tr>
+{#            <tr>#}
+{#                <th>Nombre de vues:</th>#}
+{#                <td>{{ topic.Views }}</td>#}
+{#            </tr>#}
             <tr>
                 <th>Contenu:</th>
                 <td>{{ topic.message }}</td>
@@ -39,15 +39,18 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_forum') }}">Retour</a>
+
 
 {#    Faire un bouton qui modifie la propriété CSS pour visibility hidden le formulaire de création de message#}
 
+{#    <a href="{{ path('app_message_new', {'id': topic.id}) }}">Répondre</a>#}
+    <a href="{{ path('new_message', {'topic_id': topic.id}) }}" class="btn btn-primary">Répondre</a>
 
 
 {#        <a href="{{ path('app_topic_edit', {'id': topic.id}) }}">Editer</a>#}
 
 {#    {{ include('topic/_delete_form.html.twig') }}#}
 
-
+    <br><br>
+    <a href="{{ path('app_forum') }}">Retour</a>
 {% endblock %}

@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Message;
+use App\Entity\Topic;
 use App\Form\MessageType;
 use App\Repository\MessageRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +24,7 @@ class MessageController extends AbstractController
     }
 
     #[Route('/new', name: 'app_message_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, MessageRepository $messageRepository): Response
+    public function create(Request $request, MessageRepository $messageRepository, $topic_id, EntityManagerInterface $entityManager): Response
     {
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
@@ -30,6 +32,14 @@ class MessageController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $messageRepository->save($message, true);
+
+            $entityManager = $this->getManager();
+            $topic = $entityManager->getRepository(Topic::class)->find($topic_id);
+            $message->setTopic($topic);
+            $message->setUser($this->getUser());
+            $entityManager->persist($message);
+            $entityManager->flush();
+
 
             return $this->redirectToRoute('app_message_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -75,4 +85,5 @@ class MessageController extends AbstractController
 
         return $this->redirectToRoute('app_message_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }
