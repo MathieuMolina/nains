@@ -22,11 +22,11 @@
         {% for topic in topics %}
             <tr>
                 <td>{{ topic.id }}</td>
-                <td>{{ topic.topicTitle }}</td>
-                <td>{{ topic.topicCreator }}</td>
-                <td>{{ topic.topicLastUser }}</td>
-                <td>{{ topic.topicDate ? topic.topicDate|date('Y-m-d') : '' }}</td>
-                <td>{{ topic.topicReplyDate ? topic.topicReplyDate|date('Y-m-d') : '' }}</td>
+                <td>{{ topic.Title }}</td>
+                <td>{{ topic.Creator }}</td>
+                <td>{{ topic.LastUser }}</td>
+                <td>{{ topic.Date ? topic.Date|date('Y-m-d') : '' }}</td>
+                <td>{{ topic.topicDate ? topic.ReplyDate|date('Y-m-d') : '' }}</td>
                 <td>{{ topic.topicViews }}</td>
                 <td>
                     <a href="{{ path('app_topic_show', {'id': topic.id}) }}">show</a>

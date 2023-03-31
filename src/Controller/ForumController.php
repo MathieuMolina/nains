@@ -77,4 +77,6 @@ class ForumController extends AbstractController
             'topic' => $topic,
         ]);
     }
+
+
 }

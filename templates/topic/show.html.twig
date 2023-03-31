@@ -8,39 +8,44 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ topic.id }}</td>
-            </tr>
-            <tr>
-                <th>Topic_title</th>
+                <th>Titre:</th>
                 <td>{{ topic.Title }}</td>
             </tr>
 {#            <tr>#}
 {#                <th>Topic_creator</th>#}
-{#                <td>{{ topic.Creator }}</td>#}
+{#                <td>{{ topic.User }}</td>#}
 {#            </tr>#}
 {#            <tr>#}
 {#                <th>Topic_last_user</th>#}
 {#                <td>{{ topic.LastUser }}</td>#}
 {#            </tr>#}
 {#            <tr>#}
-{#                <th>Topic_date</th>#}
-{#                <td>{{ topic.Date ? topic.Date|date('Y-m-d') : '' }}</td>#}
+                <th>Date de création:</th>
+                <td>{{ topic.CreatedAt|date('d-M-Y') }}</td>
 {#            </tr>#}
 {#            <tr>#}
 {#                <th>Topic_reply_date</th>#}
 {#                <td>{{ topic.ReplyDate ? topic.ReplyDate|date('Y-m-d') : '' }}</td>#}
 {#            </tr>#}
             <tr>
-                <th>Topic_views</th>
+                <th>Nombre de vues:</th>
                 <td>{{ topic.Views }}</td>
             </tr>
+            <tr>
+                <th>Contenu:</th>
+                <td>{{ topic.message }}</td>
+            </tr>
+
         </tbody>
     </table>
+
+
 
     <a href="{{ path('app_forum') }}">Retour</a>
 
 {#    <a href="{{ path('app_topic_edit', {'id': topic.id}) }}">Editer</a>#}
 
 {#    {{ include('topic/_delete_form.html.twig') }}#}
+
+
 {% endblock %}
