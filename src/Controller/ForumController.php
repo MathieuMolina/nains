@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -73,10 +75,61 @@ class ForumController extends AbstractController
             throw $this->createNotFoundException('Le topic n\'existe pas.');
         }
 
+        //        Rajouter la logique pour créer un nouveau message
+
+//        $form = $this->newMessage($request, $message->getTopic(), $message);
+
+
+
         return $this->render('topic/show.html.twig', [
             'topic' => $topic,
         ]);
+
     }
 
+
+
+
+
+
+//    #[Route('/message/{message}', name: 'app_front_message_show')]
+//    public function showMessage(Request $request, Message $message): Response
+//    {
+//        $form = $this->newMessage($request, $message->getTopic(), $message);
+//        $otherMessages = $this->messageRepository->findAllByCategoryParent($message->getTopic());
+//        return $this->render('home/show_message.html.twig', [
+//            'message' => $message,
+//            'otherMessages' => $otherMessages,
+//            'form' => $form->createView(),
+//        ]);
+//    }
+
+//    public function newMessage(Request $request, Topic $topic, Message $message = null): FormInterface
+//    {
+//        $newMessage = new Message();
+//        $newMessage->setDateCreated(new DateTime());
+//        $newMessage->setTopic($topic);
+//        $newMessage->setMessage(null);
+//        if ($message != null) {
+//            $title = $message->getTitle();
+//            $newMessage->setTitle($title);
+//            $newMessage->setMessage($message);
+//        }
+//        $newMessage->setUser($this->getUser());
+//
+//        $form = $this->createForm(MessageType::class, $newMessage);
+//        if ($message != null) {
+//            $form->remove('title');
+//        }
+//
+//        $form->handleRequest($request);
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $this->messageRepository->save($newMessage, true);
+//            $this->addFlash('success', 'Votre message a été enregistrée');
+//            $form = $this->createForm(MessageType::class, $newMessage);
+//        }
+//
+//        return $form;
+//    }
 
 }
