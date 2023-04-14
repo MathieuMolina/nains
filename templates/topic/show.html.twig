@@ -20,8 +20,10 @@
 			{#                <th>Topic_last_user</th>#}
 			{#                <td>{{ topic.LastUser }}</td>#}
 			{#            </tr>#}
-				<tr><th>Date de création:
-				</th><td>{{ topic.CreatedAt|date('d-M-Y') }}
+				<tr><th>
+				Date de création:
+				</th><td>
+				{{ topic.CreatedAt|date('d-M-Y') }}
 			</td>
 			</tr>
 			{#            <tr>#}
@@ -31,8 +33,11 @@
 			{#            <tr>#}
 			{#                <th>Nombre de vues:</th>#}
 			{#                <td>{{ topic.Views }}</td>#}
-				{#            </tr>#}<tr><th>
-				Contenu:</th><td>
+				{#            </tr>#}
+					<tr><th>
+				Contenu:
+					</th>
+				<td>
 			{{ topic.message }}
 		</td>
 	</tr>
@@ -43,7 +48,8 @@
 
 	{#    Faire un bouton qui modifie la propriété CSS pour visibility hidden le formulaire de création de message#}
 
-	{#    <a href="{{ path('app_message_new', {'id': topic.id}) }}">Répondre</a>#}<a href="{{ path('new_message', {'topic_id': topic.id}) }}" class="btn btn-primary"> Répondre</a>
+	{#    <a href="{{ path('app_message_new', {'id': topic.id}) }}">Répondre</a>#}
+		<a href="{{ path('new_message', {'topic_id': topic.id}) }}" class="btn btn-primary"> Répondre</a>
 
 
 	{#        <a href="{{ path('app_topic_edit', {'id': topic.id}) }}">Editer</a>#}
