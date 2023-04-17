@@ -1,56 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Topic{% endblock %}
+{% block title %}Topic
+{% endblock %}
 
 {% block body %}
-    <h1>Topic</h1>
+	<h1>Topic</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Titre du topic:</th>
-                <td>{{ topic.Title }}</td>
-            </tr>
-            <tr>
-                <th>Créateur:</th>
-                <td>{{ topic.User.username }}</td>
-            </tr>
-{#            <tr>#}
-{#                <th>Topic_last_user</th>#}
-{#                <td>{{ topic.LastUser }}</td>#}
-{#            </tr>#}
-            <tr>
-                <th>Date de création:</th>
-                <td>{{ topic.CreatedAt|date('d-M-Y') }}</td>
-            </tr>
-{#            <tr>#}
-{#                <th>Topic_reply_date</th>#}
-{#                <td>{{ topic.ReplyDate ? topic.ReplyDate|date('Y-m-d') : '' }}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <th>Nombre de vues:</th>#}
-{#                <td>{{ topic.Views }}</td>#}
-{#            </tr>#}
-            <tr>
-                <th>Contenu:</th>
-                <td>{{ topic.message }}</td>
-            </tr>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Titre du topic:</th>
+				<td>{{ topic.Title }}</td>
+			</tr>
+			<tr>
+				<th>Créateur:</th>
+				<td>{{ topic.user.username }}</td>
+			</tr>
+			{#            <tr>#}
+			{#                <th>Topic_last_user</th>#}
+			{#                <td>{{ topic.LastUser }}</td>#}
+			{#            </tr>#}
+				<tr><th>
+				Date de création:
+				</th><td>
+				{{ topic.CreatedAt|date('d-M-Y') }}
+			</td>
+			</tr>
+			{#            <tr>#}
+			{#                <th>Topic_reply_date</th>#}
+			{#                <td>{{ topic.ReplyDate ? topic.ReplyDate|date('Y-m-d') : '' }}</td>#}
+			{#            </tr>#}
+			{#            <tr>#}
+			{#                <th>Nombre de vues:</th>#}
+			{#                <td>{{ topic.Views }}</td>#}
+				{#            </tr>#}
+					<tr><th>
+				Contenu:
+					</th>
+				<td>
+			{{ topic.message }}
+		</td>
+	</tr>
 
-        </tbody>
-    </table>
-
-
-
-{#    Faire un bouton qui modifie la propriété CSS pour visibility hidden le formulaire de création de message#}
-
-{#    <a href="{{ path('app_message_new', {'id': topic.id}) }}">Répondre</a>#}
-    <a href="{{ path('new_message', {'topic_id': topic.id}) }}" class="btn btn-primary">Répondre</a>
+	</tbody>
+	</table>
 
 
-{#        <a href="{{ path('app_topic_edit', {'id': topic.id}) }}">Editer</a>#}
+	{#    Faire un bouton qui modifie la propriété CSS pour visibility hidden le formulaire de création de message#}
 
-{#    {{ include('topic/_delete_form.html.twig') }}#}
+	{#    <a href="{{ path('app_message_new', {'id': topic.id}) }}">Répondre</a>#}
+		<a href="{{ path('new_message', {'topic_id': topic.id}) }}" class="btn btn-primary"> Répondre</a>
 
-    <br><br>
-    <a href="{{ path('app_forum') }}">Retour</a>
+
+	{#        <a href="{{ path('app_topic_edit', {'id': topic.id}) }}">Editer</a>#}
+
+	{#    {{ include('topic/_delete_form.html.twig') }}#}
+
+	<br><br>
+	<a href="{{ path('app_forum') }}">Retour</a>
 {% endblock %}
