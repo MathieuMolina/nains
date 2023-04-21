@@ -125,62 +125,35 @@ btnInscription:hover{
 
 }
 
-@media screen and ( max-width: 320px ) {
-#cadreInscriptionText{
-  top: 130em;
-  left: 3em;
-}
+  @media screen and ( max-width: 320px ) {
+  #cadreInscriptionText{
+    top: 130em;
+    left: 3em;
+  }
 
-#cadreInscriptionText p{
-  font-size: 5em;
-}
+  #cadreInscriptionText p{
+    font-size: 5em;
+  }
 
-#cadreInscriptionTitre{
-  top: 8em;
-  left:5em;
-}
+  #cadreInscriptionTitre{
+    top: 8em;
+    left:5em;
+  }
 
-#cadreInscriptionTitre h1{
-  font-size:18em;
-}
+  #cadreInscriptionTitre h1{
+    font-size:18em;
+  }
 
-#btnConnexion {
-  top: 6em;
-  left: 2.3em;
-  font-size:6em;
-}
+  #btnConnexion {
+    top: 6em;
+    left: 2.3em;
+    font-size:6em;
+  }
 
-#btnInscription {
-  top: 10em;
-  left: 2.3em;
-  font-size:6em;
-}
-
-
+  #btnInscription {
+    top: 10em;
+    left: 2.3em;
+    font-size:6em;
+  }
 
 }
-
-
-
-
-
-// INSCRIPTION
-
-#fondInscription{
-
-}
-
-#fondInscriptionTitre{
-
-}
-
-#FormInscription{
-
-}
-
-// CONNEXION
-
-
-                                                  // FORUM
-
-

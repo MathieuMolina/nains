@@ -232,9 +232,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $message->setCreator(null);
             }
         }
+        return $this;
       }
-//        return $this;
-//    }
+
 
 //    public function isVerified(): bool
 //    {
