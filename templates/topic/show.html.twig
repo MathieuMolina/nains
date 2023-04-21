@@ -4,61 +4,26 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Topic</h1>
-
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Titre du topic:</th>
-				<td>{{ topic.Title }}</td>
-			</tr>
-			<tr>
-				<th>Créateur:</th>
-				<td>{{ topic.user.username }}</td>
-			</tr>
-			{#            <tr>#}
-			{#                <th>Topic_last_user</th>#}
-			{#                <td>{{ topic.LastUser }}</td>#}
-			{#            </tr>#}
-				<tr>
-					<th>
-				Date de création:
-				</th>
-					<td>
+	<div class="container">
+		<div class="card">
+			<div class="card-header">
+				<h3>Topic:
+					{{ topic.Title }}</h3>
+			</div>
+			<div class="card-body">
+				<p class="card-text">{{ topic.message }}</p>
+			</div>
+			<div class="card-footer text-muted">
+				Créé par
+				{{ topic.user.username }}
+				le
 				{{ topic.CreatedAt|date('d-M-Y') }}
-			</td>
-			</tr>
-			{#            <tr>#}
-			{#                <th>Topic_reply_date</th>#}
-			{#                <td>{{ topic.ReplyDate ? topic.ReplyDate|date('Y-m-d') : '' }}</td>#}
-			{#            </tr>#}
-			{#            <tr>#}
-			{#                <th>Nombre de vues:</th>#}
-			{#                <td>{{ topic.Views }}</td>#}
-				{#            </tr>#}
-					<tr>
-				<th>
-				Contenu:
-					</th>
-				<td>
-			{{ topic.message }}
-		</td>
-	</tr>
+			</div>
+		</div>
 
-	</tbody>
-	</table>
-
-
-	{#    Faire un bouton qui modifie la propriété CSS pour visibility hidden le formulaire de création de message#}
-
-	{#    <a href="{{ path('app_message_new', {'id': topic.id}) }}">Répondre</a>#}
-		<a href="{{ path('new_message', {'topic_id': topic.id}) }}" class="btn btn-primary"> Répondre</a>
-
-
-	{#        <a href="{{ path('app_topic_edit', {'id': topic.id}) }}">Editer</a>#}
-
-	{#    {{ include('topic/_delete_form.html.twig') }}#}
-
-	<br><br>
-	<a href="{{ path('app_forum') }}">Retour</a>
+		<div class="mt-4">
+			<a href="{{ path('new_message', {'topic_id': topic.id}) }}" class="btn btn-primary">Répondre</a>
+			<a href="{{ path('app_forum') }}" class="btn btn-secondary">Retour</a>
+		</div>
+	</div>
 {% endblock %}

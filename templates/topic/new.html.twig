@@ -1,13 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Topic{% endblock %}
+{% block title %}New Topic
+{% endblock %}
 
 {% block body %}
-    <section class="container">
-        <h1>Création de nouveau topic</h1>
-
-        {{ include('topic/_form.html.twig') }}
-
-        <a href="{{ path('app_forum') }}">Retour au forum</a>
-    </section>
+	<section class="container my-5">
+		<div class="card shadow">
+			<div class="card-header">
+				<h1 class="card-title">Création de nouveau topic</h1>
+			</div>
+			<div class="card-body">
+				{{ include('topic/_form.html.twig') }}
+			</div>
+			<div class="card-footer">
+				<a href="{{ path('app_forum') }}" class="btn btn-secondary">Retour au forum</a>
+			</div>
+		</div>
+	</section>
 {% endblock %}
