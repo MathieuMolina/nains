@@ -11,8 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\TopicRepository;
 use App\Entity\Topic;
 use App\Entity\User;
+use App\Form\MessageType;
 use App\Form\TopicType;
-
+use Doctrine\ORM\EntityManagerInterface;
 
 class ForumController extends AbstractController
 {
@@ -67,7 +68,7 @@ class ForumController extends AbstractController
 //    }
 
     #[Route('/topic/{id}', name: 'app_topic_show')]
-    public function show(Topic $topic): Response
+    public function show(Topic $topic, Request $request, EntityManagerInterface $em): Response
     {
 
 //         Vérification si le topic existe
@@ -75,14 +76,21 @@ class ForumController extends AbstractController
             throw $this->createNotFoundException('Le topic n\'existe pas.');
         }
 
-        //        Rajouter la logique pour créer un nouveau message
+        $message = new Message();
+        $form = $this->createForm(MessageType::class, $message);
 
-//        $form = $this->newMessage($request, $message->getTopic(), $message);
+        $form->handleRequest($request);
 
-
+        if ($form->isSubmitted() && $form->isValid()) {
+            $message->setTopic($topic);
+            $message->setUser($this->getUser());
+            $em->persist($message);
+            $em->flush();
+        }
 
         return $this->render('topic/show.html.twig', [
             'topic' => $topic,
+            'form' => $form->createView(),
         ]);
 
     }

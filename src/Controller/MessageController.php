@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-//#[Route('/admin/message')]
+#[Route('/admin/message')]
 class MessageController extends AbstractController
 {
     #[Route('/', name: 'app_message_index', methods: ['GET'])]
@@ -49,7 +49,7 @@ class MessageController extends AbstractController
             'form' => $form,
         ]);
     }
-    
+
 
     // #[Route('/{id}', name: 'app_message_show', methods: ['GET'])]
     // public function show(Message $message): Response
@@ -78,13 +78,12 @@ class MessageController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_message_delete', methods: ['POST'])]
-    public function delete(Request $request, Message $message, MessageRepository $messageRepository): Response
+    public function delete(Message $message, Request $request, MessageRepository $messageRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$message->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $message->getId(), $request->request->get('_token'))) {
             $messageRepository->remove($message, true);
         }
 
         return $this->redirectToRoute('app_message_index', [], Response::HTTP_SEE_OTHER);
     }
-
 }

@@ -16,15 +16,6 @@ class Message
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\Length(
-        min: 2,
-        max: 255,
-        minMessage: 'Your title must be at least {{ limit }} characters long',
-        maxMessage: 'Your title cannot be longer than {{ limit }} characters',
-    )]
-    private string $title;
-
     #[ORM\Column(type: 'text')]
     #[Assert\Length(
         min: 2,
@@ -60,17 +51,6 @@ class Message
     public function getId(): ?int
     {
         return $this->id;
-    }
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(?string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
     }
 
     public function getContent(): ?string
@@ -109,7 +89,7 @@ class Message
         return $this;
     }
 
-    public function getMessage(): ?self
+    public function getMessage()
     {
         return $this->messages;
     }

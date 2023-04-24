@@ -26,4 +26,14 @@
 			<a href="{{ path('app_forum') }}" class="btn btn-secondary">Retour</a>
 		</div>
 	</div>
+
+	<ul>
+		{% for msg in topic.messages %}
+			<li>{{msg.content}}</li>
+		{% endfor %}
+	</ul>
+
+	{{form_start(form)}}
+	<button type="submit">coucou</button>
+	{{form_end(form)}}
 {% endblock %}

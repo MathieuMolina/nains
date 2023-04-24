@@ -4,9 +4,16 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Créer un nouveau message</h1>
+	<div class="container">
+		<h1 class="mb-4">Créer un nouveau message</h1>
+		<div class="card">
+			<div class="card-body">
+				{{ include('message/_form.html.twig') }}
+			</div>
+		</div>
 
-	{{ include('message/_form.html.twig') }}
-
-	<a href="{{ path('app_forum') }}">Retour au Forum</a>
+		<div class="mt-4">
+			<a href="{{ path('app_forum') }}" class="btn btn-secondary">Retour au Forum</a>
+		</div>
+	</div>
 {% endblock %}
