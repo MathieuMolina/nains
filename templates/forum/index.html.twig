@@ -21,7 +21,7 @@
 										<th scope="col">Titre du topic</th>
 										<th scope="col">Posté par</th>
 										<th scope="col">Date de création</th>
-										<th scope="col">Date dernière réponse</th>
+										{# <th scope="col">Date dernière réponse</th> #}
 										<th scope="col">Nombre de vue</th>
 									</tr>
 								</thead>
@@ -35,7 +35,6 @@
 											<td>{{ topic.CreatedAt|date('d-F-Y H:i:s', 'Europe/Paris') }}</td>
 											{# <td>{{ topic.ReplyDate ? topic.ReplyDate|date('d-M-Y') : '' }}</td> #}
 											<td>{{ topic.Views }}</td>
-
 										</tr>
 									{% else %}
 										<tr>

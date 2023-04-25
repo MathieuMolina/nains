@@ -18,8 +18,9 @@ use Doctrine\ORM\EntityManagerInterface;
 class ForumController extends AbstractController
 {
     #[Route('/forum', name: 'app_forum')]
-    public function  index(TopicRepository $topicRepository): Response
+    public function index(TopicRepository $topicRepository): Response
     {
+
 
         return $this->render('forum/index.html.twig', [
             'controller_name' => 'ForumController',
@@ -58,6 +59,8 @@ class ForumController extends AbstractController
             throw $this->createNotFoundException('Le topic n\'existe pas.');
         }
 
+        //         Gestion réponses
+
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
 
@@ -75,13 +78,17 @@ class ForumController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+}   
 
 
 
 
 
 
-    // #[Route('/message/{message}', name: 'app_front_message_show')]
+
+
+
+// #[Route('/message/{message}', name: 'app_front_message_show')]
     // public function showMessage(Request $request, Message $message): Response
     // {
     //     $form = $this->newMessage($request, $message->getTopic(), $message);
@@ -92,33 +99,3 @@ class ForumController extends AbstractController
     //         'form' => $form->createView(),
     //     ]);
     // }
-
-    //    public function newMessage(Request $request, Topic $topic, Message $message = null): FormInterface
-    //    {
-    //        $newMessage = new Message();
-    //        $newMessage->setDateCreated(new DateTime());
-    //        $newMessage->setTopic($topic);
-    //        $newMessage->setMessage(null);
-    //        if ($message != null) {
-    //            $title = $message->getTitle();
-    //            $newMessage->setTitle($title);
-    //            $newMessage->setMessage($message);
-    //        }
-    //        $newMessage->setUser($this->getUser());
-    //
-    //        $form = $this->createForm(MessageType::class, $newMessage);
-    //        if ($message != null) {
-    //            $form->remove('title');
-    //        }
-    //
-    //        $form->handleRequest($request);
-    //        if ($form->isSubmitted() && $form->isValid()) {
-    //            $this->messageRepository->save($newMessage, true);
-    //            $this->addFlash('success', 'Votre message a été enregistrée');
-    //            $form = $this->createForm(MessageType::class, $newMessage);
-    //        }
-    //
-    //        return $form;
-    //    }
-
-}

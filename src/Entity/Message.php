@@ -109,37 +109,37 @@ class Message
         return $this->messages;
     }
 
-public function addMessage(self $message): self
-{
-    if (!$this->messages->contains($message)) {
-        $this->messages->add($message);
-        $message->setMessage($this);
-    }
-
-    return $this;
-}
-
-public function removeMessage(self $message): self
-{
-    if ($this->messages->removeElement($message)) {
-        // set the owning side to null (unless already changed)
-        if ($message->getMessage() === $this) {
-            $message->setMessage(null);
+    public function addMessage(self $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages->add($message);
+            $message->setMessage($this);
         }
+
+        return $this;
     }
 
-    return $this;
-}
+    public function removeMessage(self $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getMessage() === $this) {
+                $message->setMessage(null);
+            }
+        }
 
-public function getUser(): ?User
-{
-    return $this->user;
-}
+        return $this;
+    }
 
-public function setUser(?User $user): self
-{
-    $this->user = $user;
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
 
-    return $this;
-}
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 }
