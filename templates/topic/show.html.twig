@@ -38,9 +38,9 @@
 							{{msg.content}}
 							<div class="card-footer text-muted">
 								Répondu par
-								{{ topic.user.username }}
+								{{ msg.user.username }}
 								le
-								{{ topic.CreatedAt|date('d-F-Y à H:i:s', 'Europe/Paris') }}
+								{{ msg.dateCreated |date('d-F-Y à H:i:s', 'Europe/Paris') }}
 							</div>
 						</li>
 					{% endfor %}
@@ -68,4 +68,6 @@
 			</div>
 		</div>
 	</section>
+
+
 {% endblock %}

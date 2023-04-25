@@ -14,6 +14,7 @@ use App\Entity\User;
 use App\Form\MessageType;
 use App\Form\TopicType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\BrowserKit\Request as BrowserKitRequest;
 
 class ForumController extends AbstractController
 {
