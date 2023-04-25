@@ -3,7 +3,10 @@
 {% block title %}Topic
 {% endblock %}
 
+
 {% block body %}
+	{% include 'navbar.html.twig' %}
+
 	<div class="container">
 		<div class="card">
 			<div class="card-header">
@@ -14,25 +17,15 @@
 				<p class="card-text">{{ topic.message }}</p>
 			</div>
 			<div class="card-footer text-muted">
-				Créé par
+				Topic crée par
 				{{ topic.user.username }}
 				le
-				{{ topic.CreatedAt|date('d-M-Y') }}
+				{{ topic.CreatedAt|date('d-F-Y à H:i:s', 'Europe/Paris') }}
 			</div>
 		</div>
 
-		<div
-			class="mt-4">
-			{# <a href="{{ path('new_message', {'topic_id': topic.id}) }}" class="btn btn-primary">Répondre</a> #}
-			<a href="{{ path('app_forum') }}" class="btn btn-secondary">Retour</a>
-		</div>
-	</div>
 
-	{# <ul>
-																							{% for msg in topic.messages %}
-																								<li>{{msg.content}}</li>
-																							{% endfor %}
-																						</ul> #}
+	</div>
 
 	<div class="container">
 		<div class="row">
@@ -40,10 +33,10 @@
 				<h3>Réponses :</h3>
 				<ul class="list-group">
 					{% for msg in topic.messages %}
-						<li class="list-group-item">
+						<li class="list-group-item {% if loop.first %}rounded-0{% endif %} {% if loop.last %}rounded-bottom{% endif %}">
 							{{msg.content}}
 							<div class="card-footer text-muted">
-								Créé par
+								Répondu par
 								{{ topic.user.username }}
 								le
 								{{ topic.CreatedAt|date('d-F-Y à H:i:s', 'Europe/Paris') }}
@@ -55,11 +48,6 @@
 		</div>
 	</div>
 
-	{# {{form_start(form)}}
-															<button type="submit">coucou</button>
-															{{form_end(form)}} #}
-
-
 	<footer class="fixed-bottom bg-light">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -70,9 +58,12 @@
 					</div>
 					<button type="submit" class="btn btn-primary">Envoyer</button>
 					{{ form_end(form) }}
+					<div class="mt-4">
+						<a href="{{ path('app_forum') }}" class="btn btn-secondary">Retour au forum</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	</footer>
 
+	</footer>
 {% endblock %}

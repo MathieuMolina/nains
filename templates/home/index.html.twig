@@ -1,23 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello HomeController!
+{% endblock %}
 
 {% block body %}
 
-    <section id="FondInscription">
+	<section id="FondInscription">
 
-        <div id="cadreInscriptionTitre">
-            <h1>Nains !</h1>
-        </div>
+		<div id="cadreInscriptionTitre">
+			<h1>Nains !</h1>
+		</div>
 
-        <a id="btnConnexion" href="{{ path('app_login') }}">Connexion</a>
+		<a id="btnConnexion" href="{{ path('app_login') }}">Connexion</a>
 
-        <a id="btnInscription" href="{{ path('app_register') }}">Inscription</a>
+		<a id="btnInscription" href="{{ path('app_register') }}">Inscription</a>
 
 
-        <div id="cadreInscriptionText">
-            <p> Venez battre le fer et défendre votre forteresse contre les horribles peaux vertes !</p>
-        </div>
+		<div id="cadreInscriptionText">
+			<p>
+				Venez battre le fer et défendre votre forteresse contre les horribles peaux vertes !</p>
+		</div>
 
-    </section>
+	</section>
 {% endblock %}

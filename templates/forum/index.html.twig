@@ -4,6 +4,8 @@
 {% endblock %}
 
 {% block body %}
+	{% include 'navbar.html.twig' %}
+
 	<section class="d-flex align-items-center justify-content-center" style="height: 100vh;">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -16,8 +18,8 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<th scope="col">Titre</th>
-										<th scope="col">Auteur</th>
+										<th scope="col">Titre du topic</th>
+										<th scope="col">Posté par</th>
 										<th scope="col">Date de création</th>
 										<th scope="col">Date dernière réponse</th>
 										<th scope="col">Nombre de vue</th>
@@ -30,7 +32,7 @@
 												<a href="{{ path('app_topic_show', {id: topic.id}) }}">{{ topic.Title }}</a>
 											</td>
 											<td>{{ topic.User.username}}</td>
-											<td>{{ topic.CreatedAt|date('d-M-Y') }}</td>
+											<td>{{ topic.CreatedAt|date('d-F-Y H:i:s', 'Europe/Paris') }}</td>
 											{# <td>{{ topic.ReplyDate ? topic.ReplyDate|date('d-M-Y') : '' }}</td> #}
 											<td>{{ topic.Views }}</td>
 
@@ -43,7 +45,6 @@
 								</tbody>
 							</table>
 							<a href="{{ path('app_centre') }}" class="btn btn-secondary mr-2">Menu</a>
-							<a href="{{ path('app_logout') }}" class="btn btn-danger">Déconnexion</a>
 						</div>
 					</div>
 				</div>
