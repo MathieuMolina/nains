@@ -9,12 +9,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\TopicRepository;
+use App\Repository\MessageRepository;
 use App\Entity\Topic;
 use App\Entity\User;
 use App\Form\MessageType;
 use App\Form\TopicType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\BrowserKit\Request as BrowserKitRequest;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 class ForumController extends AbstractController
 {
@@ -52,16 +54,19 @@ class ForumController extends AbstractController
     }
 
     #[Route('/topic/{id}', name: 'app_topic_show')]
-    public function show(Topic $topic, Request $request, EntityManagerInterface $em): Response
-    {
-
-        //         Vérification si le topic existe
+    public function show(
+        Request $request,
+        Topic $topic,
+        EntityManagerInterface $em,
+        PaginatorInterface $paginator,
+        MessageRepository $messageRepository
+    ): Response {
+        // Vérification si le topic existe
         if (!$topic) {
             throw $this->createNotFoundException('Le topic n\'existe pas.');
         }
 
-        //         Gestion réponses
-
+        // Gestion réponses
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
 
@@ -74,9 +79,16 @@ class ForumController extends AbstractController
             $em->flush();
         }
 
+        $messages = $paginator->paginate(
+            $messageRepository->queryAll(), // Collection de messages à paginer
+            $request->query->getInt('page', 1), // Numéro de page
+            2 // Nombre de messages par page
+        );
+
         return $this->render('topic/show.html.twig', [
             'topic' => $topic,
             'form' => $form->createView(),
+            'messages' => $messages // Passer la pagination à la vue
         ]);
     }
 }   
