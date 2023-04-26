@@ -45,6 +45,7 @@ class TopicRepository extends ServiceEntityRepository
     }
 
     // Récupération de toutes les query pour la pagination
+    // A remplacer par QueryByUpdatedAt !!!
     public function queryAll(): Query
     {
         return $this->createQueryBuilder('t')

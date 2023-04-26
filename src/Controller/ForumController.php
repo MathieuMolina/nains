@@ -93,6 +93,7 @@ class ForumController extends AbstractController
             $messageRepository->queryByTopic($topic), // Collection de messages à paginer
             $request->query->getInt('page', 1), // Numéro de page
             2 // Nombre de messages par page
+            
         );
 
 
