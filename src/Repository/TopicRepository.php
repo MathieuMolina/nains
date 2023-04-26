@@ -6,6 +6,7 @@ use App\Entity\Topic;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @extends ServiceEntityRepository<Topic>
@@ -43,7 +44,12 @@ class TopicRepository extends ServiceEntityRepository
         }
     }
 
-
+    // Récupération de toutes les query pour la pagination
+    public function queryAll(): Query
+    {
+        return $this->createQueryBuilder('t')
+            ->getQuery();
+    }
 
     //    /**
     //     * @return Topic[] Returns an array of Topic objects

@@ -21,13 +21,22 @@ use Knp\Component\Pager\PaginatorInterface;
 class ForumController extends AbstractController
 {
     #[Route('/forum', name: 'app_forum')]
-    public function index(TopicRepository $topicRepository): Response
-    {
+    public function index(
+        TopicRepository $topicRepository,
+        PaginatorInterface $paginator,
+        Request $request,
+    ): Response {
+        // Pagination pour topics:
+        $topics = $paginator->paginate(
+            $topicRepository->queryAll(), // Collection de topics à paginer
+            $request->query->getInt('page', 1), // Numéro de page
+            2 // Nombre de topics par page
+        );
 
 
         return $this->render('forum/index.html.twig', [
             'controller_name' => 'ForumController',
-            'topics' => $topicRepository->findAll(),
+            'topics' => $topics,
         ]);
     }
 
@@ -59,7 +68,7 @@ class ForumController extends AbstractController
         Topic $topic,
         EntityManagerInterface $em,
         PaginatorInterface $paginator,
-        MessageRepository $messageRepository
+        MessageRepository $messageRepository,
     ): Response {
         // Vérification si le topic existe
         if (!$topic) {
@@ -79,11 +88,14 @@ class ForumController extends AbstractController
             $em->flush();
         }
 
+        // Pagination pour messages réponses:
         $messages = $paginator->paginate(
             $messageRepository->queryAll(), // Collection de messages à paginer
             $request->query->getInt('page', 1), // Numéro de page
             2 // Nombre de messages par page
         );
+
+
 
         return $this->render('topic/show.html.twig', [
             'topic' => $topic,
