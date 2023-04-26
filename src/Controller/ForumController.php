@@ -90,7 +90,7 @@ class ForumController extends AbstractController
 
         // Pagination pour messages réponses:
         $messages = $paginator->paginate(
-            $messageRepository->queryAll(), // Collection de messages à paginer
+            $messageRepository->queryByTopic($topic), // Collection de messages à paginer
             $request->query->getInt('page', 1), // Numéro de page
             2 // Nombre de messages par page
         );

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Message;
+use App\Entity\Topic;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
@@ -40,10 +41,22 @@ class MessageRepository extends ServiceEntityRepository
         }
     }
 
+    // Récupération de toutes les query pour la pagination. 
+    // !!! ATTENTION !!! Remplacé par la function quertyByTopic en dessous afin de ne pas répéter les mêmes messages sous tout les topics
+
+    // public function queryAll(): Query
+    // {
+    //     return $this->createQueryBuilder('m')
+    //         ->getQuery();
+    // }
+
     // Récupération de toutes les query pour la pagination
-    public function queryAll(): Query
+    public function queryByTopic(Topic $topic): Query
     {
+        // récupérer tout les messages uniquement d'un topic
         return $this->createQueryBuilder('m')
+            ->andWhere('m.topic = :topic')
+            ->setParameter('topic', $topic)
             ->getQuery();
     }
 
