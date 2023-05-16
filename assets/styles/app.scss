@@ -1,7 +1,12 @@
 @import "~bootstrap/scss/bootstrap";
 @import "custom.scss";
 
-body {
-    background-color: lightgray;
-    font-family: 'Kalam', sans-serif;
-}
+
+@import "home.scss";
+
+
+// font/variable/base dans cette ordre pour ne pas tout casser
+
+
+
+

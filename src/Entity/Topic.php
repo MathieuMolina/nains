@@ -92,7 +92,7 @@ class Topic
 
     public function setUser(?User $user): self
     {
-        $this-> user = $user;
+        $this->user = $user;
 
         return $this;
     }
@@ -149,20 +149,6 @@ class Topic
         return $this;
     }
 
-//                                             !! Content probablement remplacé par message !!
-//    public function getContent(): ?string
-//    {
-//        return $this->content;
-//    }
-//
-//    public function setContent(?string $content): self
-//    {
-//        $this->content = $content;
-//
-//        return $this;
-//    }
-
-
     public function getTopic(): ?Collection
     {
         return $this->topics;
@@ -185,9 +171,9 @@ class Topic
 
     public function addTopic(self $topic): self
     {
-        if (!$this->topic->contains($topic)) {
+        if (!$this->$topic->contains($topic)) {
             $this->topics->add($topic);
-            $topic->setTopic($this);
+            $topic->setTopic(null);
         }
 
         return $this;
@@ -195,7 +181,7 @@ class Topic
 
     public function removeTopic(self $topic): self
     {
-        if ($this->topic->removeElement($topic)) {
+        if ($this->$topic->removeElement($topic)) {
             // set the owning side to null (unless already changed)
             if ($topic->getTopic() === $this) {
                 $topic->setTopic(null);
@@ -204,5 +190,4 @@ class Topic
 
         return $this;
     }
-
 }

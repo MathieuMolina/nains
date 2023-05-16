@@ -50,14 +50,14 @@
 		</div>
 	</div>
 
-	{{ knp_pagination_render(messages) }}
-
-	<!-- Afficher les liens de pagination -->
-
 	{# Formulaire nouveau message #}
-		<section class="fixed-bottom py-3"> <div class="container">
+	<section class="fixed-bottom py-3">
+		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-md-8 col-lg-6">
+				<div
+					class="col-md-8 col-lg-6">
+					<!-- Afficher les liens de pagination -->
+					{{ knp_pagination_render(messages) }}
 					{{ form_start(form) }}
 					<div class="form-group">
 						{{ form_widget(form.content, {'attr': {'class': 'form-control', 'placeholder': 'Votre réponse'}}) }}
