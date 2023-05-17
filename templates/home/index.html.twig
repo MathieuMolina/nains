@@ -5,21 +5,28 @@
 
 {% block body %}
 
-	<section id="FondInscription">
+	<section class="container-fluid" id="homepage">
+		<div class="container">
+			<div class="row">
+				<div class="d-flex justify-content-center justify-content-md-start pt-4">
+					<h1 class="display-1">Nains !</h1>
+				</div>
+				<div>
+					<div class="">
+						<div>
+							<a id="btnConnexion" href="{{ path('app_login') }}" class="btn mr-3 mb-3 fs-1">Connexion</a>
+						</div>
+						<div>
+							<a id="btnInscription" href="{{ path('app_register') }}" class="btn fs-1">Inscription</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row justify-content-end pt-5">
+				<div class="col-lg-7">
+					<p class="text-right fs-2">Venez battre le fer et défendre votre forteresse contre les horribles peaux vertes !</p>
+				</div>
+			</div>
+		</section>
 
-		<div id="cadreInscriptionTitre">
-			<h1>Nains !</h1>
-		</div>
-
-		<a id="btnConnexion" href="{{ path('app_login') }}">Connexion</a>
-
-		<a id="btnInscription" href="{{ path('app_register') }}">Inscription</a>
-
-
-		<div id="cadreInscriptionText">
-			<p>
-				Venez battre le fer et défendre votre forteresse contre les horribles peaux vertes !</p>
-		</div>
-
-	</section>
-{% endblock %}
+	{% endblock %}

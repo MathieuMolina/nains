@@ -1,45 +1,23 @@
+// *{
+//   outline: blue 1px solid;
+// }
 
-#FondInscription{
+#homepage{
   background-image: url('../images/forteresse1.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  position: relative;
   height: 100vh;
   width: 100vw;
 }
 
-#cadreInscriptionTitre{
-  position: absolute;
-  top: 5rem;
-  left: 10rem;
-}
-
-#cadreInscriptionTitre h1{
-  font-size: 7rem;
-  font-weight: bold;
-}
-
-#cadreInscriptionText{
-  position: absolute;
-  top: 45rem;
-  left: 60rem;
-}
-
-#cadreInscriptionText p{
-  font-size: 2rem;
-  font-weight: bold;
-}
-
 #btnConnexion{
-  position: absolute;
-  top: 13rem;
-  left: 14rem;
   background-color:#17788e;
-  border-radius:42px;
+  border-radius:50px;
   border:1px solid black;
   display:inline-block;
   cursor:pointer;
   color:#ffffff;
-  font-size: 1.7rem;
   padding:10px 40px;
   text-decoration:none;
 }
@@ -49,16 +27,12 @@
 }
 
 #btnInscription{
-  position: absolute;
-  top: 19rem;
-  left: 14rem;
   background-color:#17788e;
-  border-radius:42px;
+  border-radius:50px;    
   border:1px solid black;
   display:inline-block;
   cursor:pointer;
   color:#ffffff;
-  font-size: 1.7rem;
   padding:10px 40px;
   text-decoration:none;
 }
@@ -70,84 +44,9 @@
 
 // MEDIA QUERY
 
+@media screen and (max-width: 425px) {
 
-// @media screen and ( max-width: 1440px ) {
-//     #cadreInscriptionText{
-//       position: absolute;
-//       top: 35rem;
-//       left: 50rem;
-//     }
-//   }
-  
-//   @media screen and ( max-width: 1024px ) {
-//     #cadreInscriptionText{
-//       top: 32rem;
-//       left: 30rem;
-//     }
-//   }
-  
-//   @media screen and ( max-width: 768px ) {
-//     #cadreInscriptionText{
-//       top: 26rem;
-//       left: 3rem;
-//     }
-  
-//     #cadreInscriptionTitre{
-//       top: 2rem;
-//       left:20rem;
-//     }
-  
-//     #cadreInscriptionTitre h1{
-//       font-size: 8rem;
-//     }
-  
-//     #btnConnexion {
-//       top: 6rem;
-//       left: 12rem;
-//       font-size:5rem;
-//     }
-  
-//     #btnInscription {
-//       top: 10rem;
-//       left: 12rem;
-//       font-size:5rem;
-//     }
-  
-//     #cadreInscriptionText p{
-//       font-size: 3rem;
-//     }
-  
-//   }
-  
-//     @media screen and ( max-width: 320px ) {
-//     #cadreInscriptionText{
-//       top: 130rem;
-//       left: 3rem;
-//     }
-  
-//     #cadreInscriptionText p{
-//       font-size: 5rem;
-//     }
-  
-//     #cadreInscriptionTitre{
-//       top: 8rem;
-//       left:5rem;
-//     }
-  
-//     #cadreInscriptionTitre h1{
-//       font-size:18rem;
-//     }
-  
-//     #btnConnexion {
-//       top: 6rem;
-//       left: 2.3rem;
-//       font-size:6rem;
-//     }
-  
-//     #btnInscription {
-//       top: 10rem;
-//       left: 2.3rem;
-//       font-size:6rem;
-//     }
-  
-//   }
+  #homepage p{
+    display:none;
+  }
+}

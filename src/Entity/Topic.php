@@ -36,15 +36,11 @@ class Topic
     #[ORM\OneToMany(mappedBy: 'topic', targetEntity: Message::class)]
     private Collection $messages;
 
-
-
     #[ORM\Column]
     /**
      * @ORM\Column(type="integer", options={"default": 0})
      */
     private int $views = 0;
-
-
 
     /**
      * @ORM\PreUpdate
