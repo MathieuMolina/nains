@@ -41,8 +41,20 @@
   background-color:#167E49;
 }
 
+#space{
+  height: 30vh;
+
+}
 
 // MEDIA QUERY
+
+@media screen and (max-width: 1500px) {
+
+  #space{
+    display:none;
+  }
+}
+
 
 @media screen and (max-width: 425px) {
 

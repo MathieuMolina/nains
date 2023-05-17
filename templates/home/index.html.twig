@@ -12,7 +12,7 @@
 					<h1 class="display-1">Nains !</h1>
 				</div>
 				<div>
-					<div class="">
+					<div class="d-flex flex-column align-items-center align-items-md-start">
 						<div>
 							<a id="btnConnexion" href="{{ path('app_login') }}" class="btn mr-3 mb-3 fs-1">Connexion</a>
 						</div>
@@ -22,11 +22,13 @@
 					</div>
 				</div>
 			</div>
+			<div id="space"></div>
 			<div class="row justify-content-end pt-5">
-				<div class="col-lg-7">
-					<p class="text-right fs-2">Venez battre le fer et défendre votre forteresse contre les horribles peaux vertes !</p>
+				<div class="col-md-6 col-lg-7 my-lg-4">
+					<p class="text-right fs-md-5 fs-2">Venez battre le fer et défendre votre forteresse contre les horribles peaux vertes !</p>
 				</div>
 			</div>
-		</section>
+		</div>
+	</section>
 
-	{% endblock %}
+{% endblock %}
